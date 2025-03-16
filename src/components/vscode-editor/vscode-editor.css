@@ -1,0 +1,29 @@
+
+
+
+.monaco-editor .monaco-editor-background {
+  @apply bg-background
+} 
+
+.monaco-editor .margin-view-overlays {
+  @apply bg-background
+}
+
+.monaco-editor .monaco-scrollable-element .scrollbar.vertical {
+  @apply !w-2
+}
+
+.monaco-editor .slider {
+  @apply !border-l !border-l-transparent !rounded-sm !w-2
+}
+
+.editor-group-container {
+  @apply bg-background
+}
+
+
+
+/* Custom Monaco Editor Styles with Tailwind CSS */
+
+
+/* Customize the colors and styles based on your preferences */

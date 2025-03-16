@@ -1,0 +1,59 @@
+{
+    "$schema": "vscode://schemas/settings/user",
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "__pure__/parameters-sample.json"
+            ],
+            "url": "/workspace/__pure__/parameters-json-schema.json"
+        }
+    ],
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "pure.pure-extension"
+    },
+    "[json]": {
+        "editor.formatOnPaste": true,
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+    },
+    "editor.renderLineHighlight": "none",
+    "editor.minimap.enabled": false,
+    "workbench.editor.showTabs": "none",
+    "breadcrumbs.enabled": false,
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.iconTheme": "vs-seti",
+    "editor.autoClosingBrackets": "languageDefined",
+    "editor.autoClosingQuotes": "languageDefined",
+    "editor.scrollBeyondLastLine": true,
+    "editor.mouseWheelZoom": true,
+    "editor.wordBasedSuggestions": "off",
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.foldingHighlight": false,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.fontSize": 12,
+    "editor.tabSize": 2,
+    "accessibility.signals.lineHasError": {
+        "sound": "on"
+    },
+    "accessibility.signals.onDebugBreak": {
+        "sound": "on"
+    },
+    "files.autoSave": "off",
+    "debug.toolBarLocation": "docked",
+    "editor.experimental.asyncTokenization": true,
+    "terminal.integrated.tabs.title": "${sequence}",
+    "typescript.tsserver.log": "verbose",
+    "workbench.sideBar.location": "left",
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+    "typescript.tsserver.web.typeAcquisition.enabled": true,
+    "typescript.tsserver.web.projectWideIntellisense.enabled": true,
+    "typescript.tsserver.web.projectWideIntellisense.suppressSemanticErrors": false,
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "workbench.colorCustomizations": {
+        "sideBar.background": "#09090b",
+        "sideBar.border": "#09090b",
+        "focusBorder": "#09090b",
+    }
+  }
