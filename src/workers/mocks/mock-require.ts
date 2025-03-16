@@ -1,12 +1,13 @@
-import { EvaluationContext } from "@/components/hooks/useEvalContext";
+import { EvaluationContext } from "@/hooks/useEvalContext";
 import { EsmResolve } from "@/workers/esm/esm-resolver";
-import { PureCompiler } from "@/workers/pure-compiler/pure-compiler";
 
 export class MockRequire {
   exports: Record<string, unknown> = {};
   constructor(
-    private context: EvaluationContext,
-    private createCompartment: (exports: Record<string, unknown>) => Compartment
+    // @ts-ignore
+    private _context: EvaluationContext,
+    // @ts-ignore
+    private _createCompartment: (exports: Record<string, unknown>) => Compartment
   ) { }
 
   validate(module: string) {
@@ -24,34 +25,8 @@ export class MockRequire {
     }
   }
 
-  functionModule(module: string) {
-    const relativeImport = "@/functions";
-    const funcName = module.slice(relativeImport.length + 1);
-    if (this.exports[funcName]) return this.exports;
-
-    const func = this.context.functions.find((f) => f.name === funcName);
-    if (!func) throw new Error(`Function ${funcName} not found`);
-
-    const compiled = new PureCompiler(
-      func?.code,
-      {
-        ...this.context,
-        func,
-      },
-      true
-    ).compile();
-
-    this.createCompartment(this.exports).evaluate(compiled);
-
-    return this.exports;
-  }
-
   require(module: string) {
     this.validate(module);
-
-    if (module.startsWith("@/functions")) {
-      return this.functionModule(module);
-    }
 
     return EsmResolve.resolve(module);
   }

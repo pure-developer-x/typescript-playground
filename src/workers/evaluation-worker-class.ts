@@ -9,6 +9,7 @@ export class EvaluationWorker {
   private initialized = false;
   private logger = PureLogger.instance;
   private fetch: MockPureFetch;
+  // @ts-ignore
   private context: EvaluationContext;
   private mockRequire: MockRequire;
   private exports: Record<string, unknown> = {};
@@ -88,10 +89,6 @@ export class EvaluationWorker {
     await this.setup();
     const code = this.compile(value);
     if (!code) return performance.now() - p1;
-
-    const error = new Error('test');
-    console.log(JSON.stringify(error.stack, null, 2));
-
 
     try {
       await this.compartment.evaluate(code);

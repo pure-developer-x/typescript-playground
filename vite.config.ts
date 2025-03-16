@@ -84,6 +84,7 @@ export default defineConfig({
     exclude: [],
     esbuildOptions: {
       tsconfig: "./tsconfig.json",
+      // @ts-ignore
       plugins: [importMetaUrlPlugin()],
     },
   },

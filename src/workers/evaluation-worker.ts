@@ -8,7 +8,8 @@ if (globalThis?.global?.process) {
 }
 
 lockdown({
-  errorTaming: 'unsafe',
+  __hardenTaming__: 'unsafe',
+  errorTaming: "unsafe",
 });
 console.log("Worker created");
 Comlink.expose(EvaluationWorker);

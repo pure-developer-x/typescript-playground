@@ -1,6 +1,4 @@
-import { getDefaultStore } from "jotai";
 import * as monaco from "monaco-editor";
-import { Uri } from "vscode";
 
 export class PureFile {
 

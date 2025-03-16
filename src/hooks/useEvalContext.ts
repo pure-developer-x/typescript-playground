@@ -1,9 +1,9 @@
-import { atom, ExtractAtomValue, Setter, useAtom } from "jotai";
+import { atom, ExtractAtomValue, getDefaultStore, Setter, useAtom } from "jotai";
 import { Getter } from "jotai";
 import * as Comlink from "comlink";
 import { EvaluationWorker as EvaluationWorkerClass } from "@/workers/evaluation-worker-class";
 import { debounce } from "lodash";
-import { CompileMessage, LoadingEsmMessage, MessageTypeIndexed } from "@/lib/logs";
+import { CompileMessage, FetchResult, LoadingEsmMessage, MessageTypeIndexed } from "@/lib/logs";
 import { atomEffect } from "jotai-effect";
 import { currentTextOfEditor } from "@/atoms/vscode-atoms";
 
@@ -12,9 +12,9 @@ export type EvaluationContext = ExtractAtomValue<typeof useEvalAtom>;
 
 const rerenderCountAtom = atom(0);
 const lastEvaluationIdAtom = atom<string>("");
-const lastEvaluationTimeAtom = atom<number>(0);
-const esmStatusAtom = atom<Record<string, { name: string, status: LoadingEsmMessage["status"] }>>({});
-const compileStatusAtom = atom<CompileMessage | null>(null);
+export const lastEvaluationTimeAtom = atom<number>(0);
+export const esmStatusAtom = atom<Record<string, { name: string, status: LoadingEsmMessage["status"] }>>({});
+export const compileStatusAtom = atom<CompileMessage | null>(null);
 export const logsAtom = atom<MessageTypeIndexed[]>([]);
 
 const evalWorker = new Worker(
@@ -41,10 +41,14 @@ const debounceEvaluate = debounce(
 const useEvalAtom = atom((get) => {
   const code = get(currentTextOfEditor);
   const uuid = crypto.randomUUID();
+  getDefaultStore().set(lastEvaluationIdAtom, uuid);
+
+  console.log('evaluating');
 
   return {
     value: code,
-    sqlMocks: {},
+    sqlMocks: {} as Record<string, { value: { results: { rows: any[] } } }>,
+    fetchMocks: {} as Record<string, { value: { response: FetchResult } }>,
     uuid,
   }
 });
@@ -79,12 +83,16 @@ function handleMessage(get: Getter, set: Setter) {
           };
         });
         if (message.status === "loaded") {
-          console.log("rerender");
           set(rerenderCountAtom, (prev) => prev + 1);
         }
         break;
       case "compile": {
         set(compileStatusAtom, message);
+        if (message.status === "success" || message.status === "error") {
+          set(logsAtom, logs => {
+            return [...logs.filter(log => log.executionId === lastEvaluationId)];
+          });
+        }
         break;
       }
       default: {

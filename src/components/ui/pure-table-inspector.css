@@ -1,0 +1,15 @@
+.table-inspector table {
+  @apply !border-none;
+}
+
+.table-inspector th {
+  @apply !bg-background !border-none;
+}
+
+.table-inspector th > div {
+  @apply !text-xs;
+}
+
+.table-inspector td {
+  @apply !bg-background !border-none text-xs;
+}

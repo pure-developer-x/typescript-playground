@@ -1,10 +1,7 @@
-import {
-  FetchInput,
-  Methods,
-  PureMockExplicit,
-} from "@/@types/resources";
-import { EvaluationContext } from "@/components/hooks/useEvalContext";
+import { FetchInputType } from "@/components/pages/editor/panels/log/fetch-log";
+import { EvaluationContext } from "@/hooks/useEvalContext";
 import { hashObject } from "@/lib/hash";
+import { FetchResult, Methods } from "@/lib/logs";
 import { PureLogger } from "@/workers/pure-logger";
 
 /**
@@ -33,7 +30,7 @@ export class MockPureFetch {
   private parseRequestDetails(
     input: RequestInfo | URL,
     init?: RequestInit
-  ): FetchInput {
+  ): FetchInputType {
     let url: URL;
     let method: string;
     let headers: Record<string, string> = {};
@@ -125,7 +122,7 @@ export class MockPureFetch {
     });
   }
 
-  private parseInBoundBody(mock: PureMockExplicit<'fetch'>) {
+  private parseInBoundBody(mock: { value: { response: FetchResult } }) {
     const response = mock.value.response;
     switch (response.type) {
       case "json":

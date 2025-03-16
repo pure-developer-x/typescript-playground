@@ -1,4 +1,4 @@
-import { MessageType } from "@/lib/logs";
+import { MessageType, MessageTypeIndexed } from "@/lib/logs";
 import { SafeEvaluationError } from "@/workers/execution-errors/ignored-error";
 
 export class PureLogger {
