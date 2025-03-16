@@ -39,4 +39,4 @@ If you enjoy the interactive experience of our TypeScript Playground, check out 
 
 ## Feedback
 
-Have suggestions or found a bug? Open an issue on our [GitHub repository](https://github.com/puredev/typescript-playground) or reach out to us at feedback@puredev.run.
+Have suggestions or found a bug? Open an issue on our [GitHub repository](https://github.com/puredev/typescript-playground) or reach out to us at pure.developer@puredev.run.
