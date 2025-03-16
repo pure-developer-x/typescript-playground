@@ -42,6 +42,7 @@ function SiteHeader() {
               variant="brand"
               size="sm"
               className="w-fit flex gap-2"
+              tag="a"
               // @ts-ignore
               href="https://puredev.run"
               target="_blank"
