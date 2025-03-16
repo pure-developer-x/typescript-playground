@@ -1,54 +1,42 @@
-# React + TypeScript + Vite
+# Pure Dev TypeScript Playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, browser-based TypeScript playground that lets you write and execute TypeScript code instantly with no setup required.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Instant TypeScript Execution** - Run your TypeScript code directly in the browser
+- **Real-time Feedback** - See results as you type
+- **Interactive Logs** - Watch your code execution step by step
+- **No Setup Required** - Just open and start coding
+- **Nothing Sent to Servers** - Your code stays in your browser for complete privacy
+- **TypeScript Support** - Full TypeScript language features and type checking
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Visit [puredev.run](https://puredev.run/playground) to start coding immediately.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## How It Works
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Type your TypeScript code in the editor
+2. See your code execute in real-time
+3. View the results and interactive logs in the output panel
+4. Experiment, learn, and iterate quickly
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Use Cases
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Learning TypeScript** - Experiment with TypeScript features without setting up a development environment
+- **Testing Ideas** - Quickly validate code snippets or algorithms
+- **Sharing Code** - Create and share TypeScript examples with others
+- **Interviews** - Use it for coding interviews or technical assessments
+
+## Privacy
+
+We take your privacy seriously. All code execution happens directly in your browser - nothing is sent to our servers.
+
+## Try Pure Dev
+
+If you enjoy the interactive experience of our TypeScript Playground, check out [Pure Dev](https://puredev.run) - our full backend builder that brings the same interactive experience to API development, database queries, and more.
+
+## Feedback
+
+Have suggestions or found a bug? Open an issue on our [GitHub repository](https://github.com/puredev/typescript-playground) or reach out to us at feedback@puredev.run.
