@@ -12,17 +12,68 @@ import {
   ExecuteFetchButton,
   FetchRequestDetails,
 } from "@/components/pages/editor/panels/log/fetch/components/fetch-request-details";
-import { atom } from "jotai";
-import { FetchMessage, Methods } from "@/lib/logs";
+import { atom, getDefaultStore } from "jotai";
+import { FetchMessage, FetchResult, Methods } from "@/lib/logs";
+import { toast } from "sonner";
+import { atomWithMutation } from "jotai-tanstack-query";
 
-export const executeFetchAtom = atom(() => {
-  return {
-    mutateAsync: async (request: FetchInputType) => {
-      console.log("executeFetch", request);
-    },
-    isPending: false,
-  };
-});
+export const fetchHashLookupAtom = atom<
+  Record<
+    string,
+    {
+      value: {
+        response: FetchResult;
+      };
+    }
+  >
+>({});
+
+export const executeFetchAtom = atomWithMutation(() => ({
+  mutationKey: ["execute-fetch"],
+  mutationFn: async ({
+    request,
+    hash,
+  }: {
+    request: FetchInputType;
+    hash: string;
+  }) => {
+    const response = await fetch(request.url, {
+      body: request.method === "GET" ? undefined : JSON.stringify(request.body),
+      headers: request.headers,
+      method: request.method,
+    });
+
+    console.log("response", response);
+
+    const body = await response.json().catch(() => {
+      toast.error(`Only JSON responses are supported for now.`, {
+        description: `We're working on supporting more response types!`,
+      });
+      return null;
+    });
+
+    console.log("body", body);
+    const store = getDefaultStore();
+    store.set(fetchHashLookupAtom, (hashLookup) => {
+      return {
+        ...hashLookup,
+        [hash]: {
+          value: {
+            response: {
+              headers: Object.fromEntries(response.headers.entries()),
+              status: response.status,
+              statusText: response.statusText,
+              url: request.url,
+              type: "json",
+              body,
+            },
+          },
+        },
+      };
+    });
+  },
+}));
+
 export type FetchInputType = {
   url: string;
   method: Methods;
@@ -57,7 +108,7 @@ function FetchInput({
   return (
     <VStack className="w-full border divide-y gap-0 divide-border">
       <FetchView {...request} hash={hash} />
-      <ExecuteFetchButton request={request} />
+      <ExecuteFetchButton request={request} hash={hash} />
     </VStack>
   );
 }

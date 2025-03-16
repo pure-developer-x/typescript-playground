@@ -1,10 +1,12 @@
 import { atom } from "jotai";
 import { editor } from "monaco-editor";
 import { atomEffect } from 'jotai-effect'
+import { atomWithStorage } from "jotai/utils";
+import sampleCode from "@/assets/sample-code?raw";
 
 // VSCode Atoms
 export const currentTextModelAtom = atom<editor.ITextModel | null>(null);
-export const currentTextOfEditor = atom<string>('');
+export const currentTextOfEditor = atomWithStorage<string>('saved-code', sampleCode);
 
 /**
  * Handles the subscription of the current text model
@@ -12,12 +14,14 @@ export const currentTextOfEditor = atom<string>('');
  */
 export const textModelSubscriptionAtom = atomEffect((get, set) => {
   const model = get(currentTextModelAtom);
+  const savedCode = get.peek(currentTextOfEditor);
   if (!model) return;
 
-  set(currentTextOfEditor, model.getValue());
   const disposable = model.onDidChangeContent(() => {
     set(currentTextOfEditor, model.getValue());
   });
+
+  model.setValue(savedCode);
 
   return () => {
     disposable.dispose();

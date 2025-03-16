@@ -1,19 +1,8 @@
+import { fetchHashLookupAtom } from "@/components/pages/editor/panels/log/fetch-log";
 import { CollapsibleBody } from "@/components/pages/editor/panels/log/fetch/components/collapsible-body";
 import { CollapsibleHeaders } from "@/components/pages/editor/panels/log/fetch/components/collapsible-headers";
-import { FetchResult } from "@/lib/logs";
 import { PlayIcon } from "@radix-ui/react-icons";
-import { atom, useAtomValue } from "jotai";
-
-const fetchHashLookupAtom = atom<
-  Record<
-    string,
-    {
-      value: {
-        response: FetchResult;
-      };
-    }
-  >
->({});
+import { useAtomValue } from "jotai";
 
 export function FetchResponseDetails({ hash }: { hash: string }) {
   const fetchMocks = useAtomValue(fetchHashLookupAtom);

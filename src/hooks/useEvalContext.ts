@@ -3,9 +3,10 @@ import { Getter } from "jotai";
 import * as Comlink from "comlink";
 import { EvaluationWorker as EvaluationWorkerClass } from "@/workers/evaluation-worker-class";
 import { debounce } from "lodash";
-import { CompileMessage, FetchResult, LoadingEsmMessage, MessageTypeIndexed } from "@/lib/logs";
+import { CompileMessage, LoadingEsmMessage, MessageTypeIndexed } from "@/lib/logs";
 import { atomEffect } from "jotai-effect";
 import { currentTextOfEditor } from "@/atoms/vscode-atoms";
+import { fetchHashLookupAtom } from "@/components/pages/editor/panels/log/fetch-log";
 
 export type EvaluationContext = ExtractAtomValue<typeof useEvalAtom>;
 
@@ -40,15 +41,20 @@ const debounceEvaluate = debounce(
 
 const useEvalAtom = atom((get) => {
   const code = get(currentTextOfEditor);
+  const fetchMocks = get(fetchHashLookupAtom);
   const uuid = crypto.randomUUID();
   getDefaultStore().set(lastEvaluationIdAtom, uuid);
 
-  console.log('evaluating');
+  console.log('evaluating', {
+    code,
+    fetchMocks,
+    uuid,
+  });
 
   return {
     value: code,
     sqlMocks: {} as Record<string, { value: { results: { rows: any[] } } }>,
-    fetchMocks: {} as Record<string, { value: { response: FetchResult } }>,
+    fetchMocks,
     uuid,
   }
 });

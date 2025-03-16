@@ -5,8 +5,13 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { VSCodeEditor } from "@/components/vscode-editor/vscode-editor";
-import { ExternalLinkIcon } from "@radix-ui/react-icons";
+import { ExternalLinkIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
@@ -53,8 +58,9 @@ function SiteHeader() {
             </Button>
           </div>,
           {
-            duration: 10000,
+            duration: 15 * 1000,
             position: "bottom-right",
+            closeButton: true,
           }
         );
       },
@@ -65,13 +71,18 @@ function SiteHeader() {
   }, []);
 
   return (
-    <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center justify-between">
-        <div className="flex flex-col gap-0.5">
+    <header className="border-b mb-4">
+      <div className="px-4 flex h-14 items-center justify-between">
+        <div className="flex gap-2 items-center">
           <span className="font-semibold">TypeScript Playground</span>
-          <span className="text-muted-foreground text-sm">
-            A simple playground for TypeScript
-          </span>
+          <Tooltip>
+            <TooltipTrigger>
+              <InfoCircledIcon className="h-4 w-4" />
+            </TooltipTrigger>
+            <TooltipContent>
+              Your code stays private — nothing is sent to our servers.
+            </TooltipContent>
+          </Tooltip>
         </div>
         <Button
           variant="brand"
@@ -83,7 +94,7 @@ function SiteHeader() {
           rel="noopener noreferrer"
           className="flex items-center gap-2"
         >
-          <a>Try Pure Dev</a>
+          <a>Pure Dev</a>
           <ExternalLinkIcon className="h-4 w-4" />
         </Button>
       </div>

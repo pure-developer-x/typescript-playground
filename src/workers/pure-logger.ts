@@ -49,6 +49,11 @@ export class PureLogger {
     this.send_log(args, "log");
   }
 
+  log_error(...args: unknown[]) {
+    this.send_log(args, "error");
+  }
+
+
   error(error: unknown) {
     if (error instanceof SafeEvaluationError) {
       return;

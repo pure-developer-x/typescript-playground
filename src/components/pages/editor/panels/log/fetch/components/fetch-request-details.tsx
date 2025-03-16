@@ -16,7 +16,13 @@ import {
   FetchInputType,
 } from "@/components/pages/editor/panels/log/fetch-log";
 
-export function ExecuteFetchButton({ request }: { request: FetchInputType }) {
+export function ExecuteFetchButton({
+  request,
+  hash,
+}: {
+  request: FetchInputType;
+  hash: string;
+}) {
   const [{ mutateAsync: executeSql, isPending }] = useAtom(executeFetchAtom);
 
   return (
@@ -27,7 +33,8 @@ export function ExecuteFetchButton({ request }: { request: FetchInputType }) {
       variant="ghost"
       isLoading={isPending}
       onClick={async () => {
-        executeSql(request);
+        console.log("executing fetch", request, hash);
+        executeSql({ request, hash });
       }}
     >
       <PlayIcon />

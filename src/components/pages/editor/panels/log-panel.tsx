@@ -10,6 +10,12 @@ import { ResponseLog } from "@/components/pages/editor/panels/log/response-log";
 import { HStack } from "@/components/ui/hstack";
 import { CompileStatus } from "./log/compile/compile-status";
 import { MessageType } from "@/lib/logs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { ExternalLinkIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 
 export function LogPanel() {
   const [logs] = useAtom(logsAtom);
@@ -75,6 +81,8 @@ function Log({ messageType }: { messageType: MessageType }) {
       return <ErrorLog {...messageType} />;
     case "log":
       return <SimpleLog {...messageType} />;
+    case "warn":
+      return <SimpleLog {...messageType} />;
     case "response":
       return <ResponseLog {...messageType} />;
     case "loading-esm":
@@ -88,7 +96,29 @@ function Log({ messageType }: { messageType: MessageType }) {
 function TopBar() {
   return (
     <HStack className="pl-2 pr-4 h-8 justify-between items-center">
-      <span className="text-xs text-gray-400">Interactive Logs</span>
+      <HStack>
+        <span className="text-xs text-muted-foreground">Interactive Logs</span>
+        <Tooltip>
+          <TooltipTrigger>
+            <InfoCircledIcon className="w-4 h-4 text-muted-foreground" />
+          </TooltipTrigger>
+          <TooltipContent className="max-w-sm">
+            <p>
+              Interactive logs are a feature of Pure Dev that allows you to
+              interact with the logs in real-time. The logs here are subsets of
+              the logs that Pure Dev produces. Check it out{" "}
+              <a
+                href="https://puredev.run"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-b border-brand-primary inline-flex gap-1 items-center"
+              >
+                Pure Dev <ExternalLinkIcon className="w-3 h-3 inline-block" />
+              </a>
+            </p>
+          </TooltipContent>
+        </Tooltip>
+      </HStack>
       <HStack className="gap-4">
         <CompileStatus />
       </HStack>

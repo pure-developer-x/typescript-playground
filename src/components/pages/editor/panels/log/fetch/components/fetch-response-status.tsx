@@ -1,16 +1,7 @@
 import { HStack } from "@/components/ui/hstack";
-import { FetchResult } from "@/lib/logs";
+import { fetchHashLookupAtom } from "@/components/pages/editor/panels/log/fetch-log";
 import { cn } from "@/lib/utils";
-import { atom, useAtomValue } from "jotai";
-
-const fetchHashLookupAtom = atom<
-  Record<
-    string,
-    {
-      value: { response: FetchResult };
-    }
-  >
->({});
+import { useAtomValue } from "jotai";
 
 export function FetchResponseStatus({ hash }: { hash: string }) {
   const fetchMocks = useAtomValue(fetchHashLookupAtom);

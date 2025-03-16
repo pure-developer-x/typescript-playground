@@ -61,7 +61,7 @@ function InternalVSCodeEditor({ file, onInitialized }: VSCodeEditorProps) {
   }, [file, setTextModelAtom]);
 
   return (
-    <div className="h-full mt-4">
+    <div className="h-full">
       <div id="editor" className="relative w-full h-full"></div>
     </div>
   );

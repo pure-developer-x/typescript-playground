@@ -21,6 +21,12 @@ export class EvaluationWorker {
         log: (...args: unknown[]) => {
           this.logger.log(...args);
         },
+        error: (...args: unknown[]) => {
+          this.logger.log_error(...args);
+        },
+        warn: (...args: unknown[]) => {
+          this.logger.warn(...args);
+        },
       }),
       fetch: this.fetch.fetch.bind(this.fetch),
       Headers,
