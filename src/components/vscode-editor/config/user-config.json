@@ -32,7 +32,7 @@
     "editor.foldingHighlight": false,
     "editor.semanticHighlighting.enabled": true,
     "editor.bracketPairColorization.enabled": false,
-    "editor.fontSize": 12,
+    "editor.fontSize": 14,
     "editor.tabSize": 2,
     "accessibility.signals.lineHasError": {
         "sound": "on"

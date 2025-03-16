@@ -11,9 +11,13 @@ import { memo, useEffect } from "react";
 import "@/components/vscode-editor/vscode-editor.css";
 import { PureFile } from "@/lib/pure-file";
 import { useMount } from "@/hooks/useMount";
-import { useSetAtom } from "jotai";
-import { currentTextModelAtom } from "@/atoms/vscode-atoms";
+import { useAtom, useSetAtom } from "jotai";
+import {
+  currentTextModelAtom,
+  textModelSubscriptionAtom,
+} from "@/atoms/vscode-atoms";
 import { PureVSCode } from "@/components/vscode-editor/pure-vscode";
+import { useEvalContext } from "@/hooks/useEvalContext";
 
 type VSCodeEditorProps = {
   file: string;
@@ -28,6 +32,9 @@ async function start() {
 }
 
 function InternalVSCodeEditor({ file, onInitialized }: VSCodeEditorProps) {
+  useAtom(textModelSubscriptionAtom);
+  useEvalContext();
+
   const setTextModelAtom = useSetAtom(currentTextModelAtom);
 
   useMount(async () => {
@@ -54,7 +61,7 @@ function InternalVSCodeEditor({ file, onInitialized }: VSCodeEditorProps) {
   }, [file, setTextModelAtom]);
 
   return (
-    <div className="flex h-full">
+    <div className="h-full mt-4">
       <div id="editor" className="relative w-full h-full"></div>
     </div>
   );

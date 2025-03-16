@@ -93,12 +93,9 @@ void getApi().then(async (api) => {
 async function formatDocument(
   document: vscode.TextDocument
 ): Promise<vscode.TextEdit[]> {
-  console.log("Formatting document");
-  // Your formatting logic here
   const edits: vscode.TextEdit[] = [];
   const unformattedText = document.getText();
 
-  console.log("Formatting document", document);
 
   try {
     const parser = await import("prettier/parser-typescript");
