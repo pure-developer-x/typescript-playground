@@ -20,7 +20,7 @@ export function FetchResponseStatus({ hash }: { hash: string }) {
   };
 
   return (
-    <HStack className="px-2 pr-6">
+    <HStack className="flex-shrink-0">
       <div
         className={cn(
           "px-1.5 rounded-md text-xs font-medium",

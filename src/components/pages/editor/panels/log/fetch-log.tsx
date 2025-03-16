@@ -124,12 +124,18 @@ function FetchView({
     <div className="relative">
       {/* Method and URL */}
       <HStack className="text-xs px-2 py-1 bg-muted/30 border-b border-border">
-        <span className={cn("font-mono font-medium", methodTextColor(method))}>
+        <span
+          className={cn(
+            "font-mono font-medium flex-shrink-0",
+            methodTextColor(method)
+          )}
+        >
           {method}
         </span>
         <span className="text-muted-foreground font-mono truncate">{url}</span>
         <Spacer />
         <FetchResponseStatus hash={hash} />
+        <div className="basis-12"></div>
       </HStack>
       <FetchRequestDetails headers={headers} body={body} />
       <FetchResponseDetails hash={hash} />
