@@ -1,4 +1,4 @@
-import { IEditorOverrideServices, LogLevel } from "@codingame/monaco-vscode-api";
+import { IEditorOverrideServices, IWorkbenchConstructionOptions, LogLevel } from "@codingame/monaco-vscode-api";
 import "./custom-extensions/pure-extension";
 import "@codingame/monaco-vscode-json-language-features-default-extension";
 import "@codingame/monaco-vscode-typescript-basics-default-extension";
@@ -130,6 +130,7 @@ export async function initializeVSCodeEditor() {
         controlUrl: "",
         nlsBaseUrl: "",
         publisherUrl: "",
+        extensionUrlTemplate: "",
       },
     },
     workspaceProvider: {
@@ -141,7 +142,7 @@ export async function initializeVSCodeEditor() {
         workspaceUri: workspaceFile,
       },
     },
-  };
+  } satisfies IWorkbenchConstructionOptions;
 
   return { commonServices, workbenchSettings, fileSystemProvider };
 }
