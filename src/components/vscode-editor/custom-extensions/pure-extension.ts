@@ -1,4 +1,4 @@
-import { registerExtension } from "vscode/extensions";
+import { registerExtension } from "@codingame/monaco-vscode-api/extensions";
 import * as vscode from "vscode";
 import { formatWithCursor } from "prettier/standalone";
 import * as monaco from "monaco-editor";

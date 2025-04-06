@@ -1,8 +1,6 @@
-import { IModelService, getService } from "vscode/services";
+import { IModelService, getService } from "@codingame/monaco-vscode-api";
 import "@codingame/monaco-vscode-theme-defaults-default-extension";
 import "@codingame/monaco-vscode-theme-seti-default-extension";
-import "vscode/localExtensionHost";
-import "vscode/localExtensionHost";
 import {
   Parts,
   attachPart,

@@ -45,11 +45,6 @@ const useEvalAtom = atom((get) => {
   const uuid = crypto.randomUUID();
   getDefaultStore().set(lastEvaluationIdAtom, uuid);
 
-  console.log('evaluating', {
-    code,
-    fetchMocks,
-    uuid,
-  });
 
   return {
     value: code,

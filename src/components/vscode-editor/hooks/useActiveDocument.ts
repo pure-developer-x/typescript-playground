@@ -6,7 +6,7 @@ import {
   IEditorService,
   IVisibleEditorPane,
   getService,
-} from "vscode/services";
+} from "@codingame/monaco-vscode-api";
 
 const GroupModelChangeKind = {
   GROUP_ACTIVE: 0,

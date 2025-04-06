@@ -3,7 +3,7 @@ import {
   RegisteredFileSystemProvider,
   RegisteredMemoryFile,
 } from "@codingame/monaco-vscode-files-service-override";
-import { IEditorService, getService, initialize } from "vscode/services";
+import { IEditorService, getService, initialize } from "@codingame/monaco-vscode-api";
 import { PureFile } from "@/lib/pure-file";
 import pureModule from "@/assets/pure.d.ts?raw";
 import pureInterfaceModule from "@/assets/pure-interface.d.ts?raw";

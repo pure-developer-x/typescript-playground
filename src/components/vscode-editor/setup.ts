@@ -1,4 +1,4 @@
-import { IEditorOverrideServices, LogLevel } from "vscode/services";
+import { IEditorOverrideServices, LogLevel } from "@codingame/monaco-vscode-api";
 import "./custom-extensions/pure-extension";
 import "@codingame/monaco-vscode-json-language-features-default-extension";
 import "@codingame/monaco-vscode-typescript-basics-default-extension";
@@ -8,8 +8,6 @@ import "@codingame/monaco-vscode-theme-defaults-default-extension";
 import "@codingame/monaco-vscode-theme-seti-default-extension";
 import '@codingame/monaco-vscode-references-view-default-extension';
 import "@codingame/monaco-vscode-search-result-default-extension";
-import * as vscode from "vscode";
-import "vscode/localExtensionHost";
 import { workerConfig } from "./tools/extHostWorker";
 import getConfigurationServiceOverride, {
   initUserConfiguration,
@@ -19,7 +17,6 @@ import {
   RegisteredMemoryFile,
   registerFileSystemOverlay,
 } from "@codingame/monaco-vscode-files-service-override";
-import "vscode/localExtensionHost";
 import defaultConfiguration from "./config/user-config.json?raw";
 import getTextmateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
 import getThemeServiceOverride from "@codingame/monaco-vscode-theme-service-override";
@@ -33,9 +30,10 @@ import getViewsServiceOverride, {
 } from "@codingame/monaco-vscode-views-service-override";
 import { Worker } from "./tools/crossOriginWorker";
 import "@/components/vscode-editor/vscode-editor.css";
+import { Uri } from "monaco-editor";
 
 export async function initializeVSCodeEditor() {
-  const workspaceFile = vscode.Uri.file('/workspace.code-workspace');
+  const workspaceFile = Uri.file('/workspace.code-workspace');
 
   const fileSystemProvider = new RegisteredFileSystemProvider(false);
 
