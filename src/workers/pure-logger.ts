@@ -4,7 +4,7 @@ import { SafeEvaluationError } from "@/workers/execution-errors/ignored-error";
 export class PureLogger {
   static logger: PureLogger;
   index: number = 0;
-  executionId: string = '';
+  executionId: number = 0;
 
   constructor() {
     PureLogger.logger = this;
@@ -20,7 +20,7 @@ export class PureLogger {
     this.index = 0;
   }
 
-  init(executionId: string) {
+  init(executionId: number) {
     this.executionId = executionId;
   }
 

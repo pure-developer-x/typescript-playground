@@ -50,7 +50,7 @@ export class EvaluationWorker {
 
   constructor(context: EvaluationContext) {
     this.context = context;
-    this.logger.init(context.uuid);
+    this.logger.init(context.executionId);
     this.fetch = new MockPureFetch(context);
     this.mockRequire = new MockRequire(
       context,

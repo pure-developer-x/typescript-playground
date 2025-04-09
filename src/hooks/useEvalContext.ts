@@ -12,7 +12,7 @@ export type EvaluationContext = ExtractAtomValue<typeof useEvalAtom>;
 
 
 const rerenderCountAtom = atom(0);
-const lastEvaluationIdAtom = atom<string>("");
+const lastEvaluationIdAtom = atom<number>(0);
 export const lastEvaluationTimeAtom = atom<number>(0);
 export const esmStatusAtom = atom<Record<string, { name: string, status: LoadingEsmMessage["status"] }>>({});
 export const compileStatusAtom = atom<CompileMessage | null>(null);
@@ -42,15 +42,15 @@ const debounceEvaluate = debounce(
 const useEvalAtom = atom((get) => {
   const code = get(currentTextOfEditor);
   const fetchMocks = get(fetchHashLookupAtom);
-  const uuid = crypto.randomUUID();
-  getDefaultStore().set(lastEvaluationIdAtom, uuid);
+  const executionId = getDefaultStore().get(lastEvaluationIdAtom) + 1;
+  getDefaultStore().set(lastEvaluationIdAtom, executionId);
 
 
   return {
     value: code,
     sqlMocks: {} as Record<string, { value: { results: { rows: any[] } } }>,
     fetchMocks,
-    uuid,
+    executionId,
   }
 });
 
@@ -70,7 +70,11 @@ function handleMessage(get: Getter, set: Setter) {
   return function (event: MessageEvent<{ type: "log"; log: MessageTypeIndexed }>) {
     if (event.data.type !== "log") return; // ignore non-log message coming from comlink
     const lastEvaluationId = get(lastEvaluationIdAtom);
+
+
+
     const message = event.data.log;
+    if (message.executionId < lastEvaluationId) return; // ignore logs from previous executions
 
     switch (message.type) {
       case "loading-esm":

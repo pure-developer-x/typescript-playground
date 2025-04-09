@@ -24,7 +24,7 @@ export type OutBoundRequest = {
 };
 
 
-export type MessageTypeIndexed = { executionId: string } & MessageType;
+export type MessageTypeIndexed = { executionId: number } & MessageType;
 
 export type MessageType =
   | LogMessage
