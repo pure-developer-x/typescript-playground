@@ -149,7 +149,7 @@
     "vaul": "^0.9.9",
     "vite-plugin-node-polyfills": "^0.22.0",
     "vite-plugin-top-level-await": "^1.4.1",
-    "vscode": "npm:@codingame/monaco-vscode-extension-api@15.0.3",
+    "vscode": "npm:@codingame/monaco-vscode-extension-api@^15.0.3",
     "zod": "^3.24.2"
   },
   "devDependencies": {

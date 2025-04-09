@@ -9,6 +9,7 @@ import pureModule from "@/assets/pure.d.ts?raw";
 import pureInterfaceModule from "@/assets/pure-interface.d.ts?raw";
 import tsconfig from "./config/tsconfig.pure.json?raw";
 import { initializeVSCodeEditor } from "@/components/vscode-editor/setup";
+import { createPureExtension } from "@/components/vscode-editor/custom-extensions/pure-extension";
 
 export class PureVSCode {
   private static _instance: PureVSCode | null = null;
@@ -47,6 +48,8 @@ export class PureVSCode {
     this.createFile("pure.d.ts", pureModule);
     this.createFile('pure-interface.d.ts', pureInterfaceModule)
     await initialize({ ...commonServices }, document.body, workbenchSettings);
+
+    createPureExtension();
 
   }
 
