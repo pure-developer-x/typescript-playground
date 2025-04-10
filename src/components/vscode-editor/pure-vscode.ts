@@ -123,4 +123,18 @@ export class PureVSCode {
 
     return editor;
   }
+
+  async closeAndOpen(file: string) {
+    const service = await getService(IEditorService);
+    const editor = service.getEditors(0).at(0);
+    if (!editor) return;
+
+    await service.closeEditor(editor);
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    await service.openEditor({
+      resource: PureFile.createUri(file),
+    });
+  }
 }

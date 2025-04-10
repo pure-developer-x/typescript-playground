@@ -7,6 +7,7 @@ import { CompileMessage, LoadingEsmMessage, MessageTypeIndexed } from "@/lib/log
 import { atomEffect } from "jotai-effect";
 import { currentTextOfEditor } from "@/atoms/vscode-atoms";
 import { fetchHashLookupAtom } from "@/components/pages/editor/panels/log/fetch-log";
+import { dependenciesAtom } from "@/atoms/dependency-atom";
 
 export type EvaluationContext = ExtractAtomValue<typeof useEvalAtom>;
 
@@ -42,6 +43,7 @@ const debounceEvaluate = debounce(
 const useEvalAtom = atom((get) => {
   const code = get(currentTextOfEditor);
   const fetchMocks = get(fetchHashLookupAtom);
+  const dependencies = get(dependenciesAtom);
   const executionId = getDefaultStore().get(lastEvaluationIdAtom) + 1;
   getDefaultStore().set(lastEvaluationIdAtom, executionId);
 
@@ -50,6 +52,7 @@ const useEvalAtom = atom((get) => {
     value: code,
     sqlMocks: {} as Record<string, { value: { results: { rows: any[] } } }>,
     fetchMocks,
+    dependencies,
     executionId,
   }
 });

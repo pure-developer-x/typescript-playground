@@ -1,5 +1,7 @@
 import { LogPanel } from "@/components/pages/editor/panels/log-panel";
 import { Button } from "@/components/ui/button";
+import { HStack } from "@/components/ui/hstack";
+import { NpmModules } from "@/components/ui/npm-modules";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -11,7 +13,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { VSCodeEditor } from "@/components/vscode-editor/vscode-editor";
-import { ExternalLinkIcon, InfoCircledIcon } from "@radix-ui/react-icons";
+import {
+  ExternalLinkIcon,
+  GitHubLogoIcon,
+  InfoCircledIcon,
+} from "@radix-ui/react-icons";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
@@ -19,9 +25,10 @@ export function PureEditor() {
   return (
     <div className="h-full flex flex-col">
       <SiteHeader />
+      <NpmModules />
       <ResizablePanelGroup direction="vertical" className="h-full">
         <ResizablePanel defaultSize={60}>
-          <VSCodeEditor file="test.ts" />
+          <VSCodeEditor file="main.ts" />
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel defaultSize={40}>
@@ -71,7 +78,7 @@ function SiteHeader() {
   }, []);
 
   return (
-    <header className="border-b mb-4">
+    <header className="border-b">
       <div className="px-4 flex h-14 items-center justify-between">
         <div className="flex gap-2 items-center">
           <span className="font-semibold">TypeScript Playground</span>
@@ -84,19 +91,32 @@ function SiteHeader() {
             </TooltipContent>
           </Tooltip>
         </div>
-        <Button
-          variant="brand"
-          size="xs"
-          tag={"a"}
-          // @ts-ignore
-          href="https://puredev.run"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2"
-        >
-          <a>Pure Dev</a>
-          <ExternalLinkIcon className="h-4 w-4" />
-        </Button>
+        <HStack className="gap-2">
+          <Button
+            variant="brand"
+            size="md-icon"
+            tag="a"
+            // @ts-ignore
+            href="https://github.com/pure-developer-x/typescript-playground"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GitHubLogoIcon className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="brand"
+            size="xs"
+            tag={"a"}
+            // @ts-ignore
+            href="https://puredev.run"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2"
+          >
+            <a>Pure Dev</a>
+            <ExternalLinkIcon className="h-4 w-4" />
+          </Button>
+        </HStack>
       </div>
     </header>
   );

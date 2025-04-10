@@ -83,9 +83,6 @@ export async function initializeVSCodeEditor() {
 
   await Promise.all([initUserConfiguration(defaultConfiguration)]);
 
-  // await import("@codingame/monaco-vscode-typescript-basics-default-extension");
-  // await import("@codingame/monaco-vscode-typescript-language-features-default-extension");
-
   const commonServices: IEditorOverrideServices = {
     ...getExtensionServiceOverride(workerConfig),
     ...getTextmateServiceOverride(),
