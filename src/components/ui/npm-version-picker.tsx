@@ -1,5 +1,4 @@
 import { dependenciesAtom, Dependency } from "@/atoms/dependency-atom";
-import { upsertBy } from "@/atoms/utils";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -19,7 +18,7 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { useState } from "react";
 
 export function NpmVersionPicker({ dependency }: { dependency: Dependency }) {
@@ -29,7 +28,7 @@ export function NpmVersionPicker({ dependency }: { dependency: Dependency }) {
   const [versions, setVersions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showPrerelease, setShowPrerelease] = useState(false);
-  const [dependencies, setDependencies] = useAtom(dependenciesAtom);
+  const setDependencies = useSetAtom(dependenciesAtom);
   const [open, setOpen] = useState(false);
 
   const filteredVersions = versions.filter((v) => {

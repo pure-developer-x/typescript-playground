@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useCallback } from "react";
-import { ChevronsUpDown } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -15,8 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Text } from "@/components/ui/text";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { dependenciesAtom } from "@/atoms/dependency-atom";
 import { upsertBy } from "@/atoms/utils";
 import { keyBy } from "lodash";
